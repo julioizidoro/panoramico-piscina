@@ -1,0 +1,95 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14/04/2016, 15:17:51
+    Author     : Julio
+*/
+
+.botaoAzulLogin {
+    padding: 2%;
+    margin:2%;
+    border:1px solid #A3DAD9;
+    position:relative;
+    border-radius: 10px;
+    color:white;
+    cursor: pointer;
+    background-color: #A3DAD9;
+    background: #0098DA;
+}
+
+.tamanho40{
+    font-size: 40px;
+}
+
+.botaoAzulLogin:hover {
+    color:#fff;
+    border:1px solid #122b40;
+    background-color: #0E69D1;
+    background: #0E69D1;
+}
+
+
+.limpar {
+    padding: 0.5%;
+    border:1px solid #A3DAD9;
+    position:relative;
+    float: left;
+    border-radius: 10px;
+    color:#fff;
+    cursor: pointer;
+    background-color: #8CA9D2;
+}
+.limpar:hover {
+    color:#fff;
+    border:1px solid #122b40;
+    background-color: #0E69D1;
+}
+
+
+body{
+    overflow-x: hidden;
+}
+
+#tessste{
+     overflow-x: hidden;
+}
+
+
+
+.acordion{
+    background: black !important;
+}
+
+
+.ui-widget-header {
+    border: none;
+    background: transparent; 
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+
+.ui-selectonemenu .ui-selectonemenu-label {
+    display: block;
+    border: none;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: normal;
+    width: 100%;
+    text-align: left;
+    font-size: 40px;
+}
+
+
+.ui-selectonemenu-panel .ui-selectonemenu-list-item {
+    border: 0px none;
+    margin: 1px 0;
+    padding: 3px 5px;
+    font-size: 40px;
+    text-align: left;
+    white-space: nowrap;
+}

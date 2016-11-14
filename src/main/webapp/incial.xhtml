@@ -1,0 +1,109 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Panoramico</title>
+        <link rel="stylesheet" type="text/css" href="resources/css/endless.min.css"/>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/layout.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/menu.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/buttons.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/tabelas.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/textos.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/modal.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/css.css"/>
+
+        <!-- FONTS -->
+        <link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome-4.6.3/css/font-awesome.min.css"/>
+    </h:head>
+
+    <body>  
+            <p:growl autoUpdate="true" id="growl" showDetail="true" class="tamanho40"/>   
+
+
+            <br/><br/>
+            <br/> 
+            <div class="col-10 boxAzulClaro" style="width: 100%;">   
+                <br/> 
+                <h:form id="idFormAcessoPiscina" style="margin-left:1%;width: 97%;"> 
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" style="margin-left:10%;width: 80%;"/>
+                    <p:accordionPanel activeIndex="-1" style="width:98%;margin-left: 1%;" rendered="true">
+                        <p:tab title="Pesquisar" titleStyle="font-size:40px;">
+                            <p:outputLabel class="titTela" value="Nome Cliente" style="font-size: 40px;text-align: left;margin-right: 31%;"/>
+                            <p:outputLabel class="titTela" value="Matricula" style="font-size: 40px;text-align: left;margin-right: 13%;"/>
+                            <br/>
+                            <p:inputText class="form-control" id="idnomeCliente" value="#{acessoPiscinaMB.nomeCliente}" style="font-size: 40px; height: 90px;width: 49%;float: left;"/>
+                            <p:inputText class="form-control" id="idMatricula" value="#{acessoPiscinaMB.matricula}"  style="margin-left:15%;font-size: 40px; height: 90px;width: 32%;float: left;"/>
+                            <br/><br/>
+                            
+                            <p:commandLink style="text-decoration: none; margin-top: 10%;" actionListener="#{acessoPiscinaMB.pequisarAssociadoDependente()}" ajax="false" update="idAcessoPiscinaAssociado, idAcessoPiscinaDependentes, messages">
+                                <div style="font-size: 40px;padding: 3%;width:45%;margin-left: 2%;" class="adicionar">Pesquisar</div>
+                            </p:commandLink>
+                            <p:commandLink style="text-decoration: none; margin-top: 2%;" actionListener="#{acessoPiscinaMB.limpar()}" ajax="false" update="@form">
+                                    <div style="font-size: 40px;padding: 3%;width:45%;margin-left: 2%;" class="limpar">Limpar</div>
+                            </p:commandLink>
+                        </p:tab>
+                    </p:accordionPanel>
+                            <br/><br/>
+                    <!-- TABELA CADASTROS -->
+                    <p:tabView style="background: transparent;" id="idTabConsultas">
+                        <p:tab title="Associado" titleStyle="font-size:40px;">
+                            <h:dataTable  id="idAcessoPiscinaAssociado" class="table" styleClass="table" style="width: 95%;font-size: 40px;" value="#{acessoPiscinaMB.listaExameAssociado}" var="associado">
+                                <h:column>
+                                    <f:facet name="header" ><b style="font-size: 40px;">Nome</b></f:facet> 
+                                    <h:outputText value="#{associado.exame.nomeCliente}" styleClass="alinhamento" style="float: left;font-size: 40px;" />
+                                </h:column>
+                                <h:column >  
+                                    <f:facet name="header"><b style="font-size: 40px;">Matricula</b></f:facet> 
+                                    <h:outputText value="#{associado.exame.matricula}" styleClass="alinhamento" style="float: left;font-size: 40px;" />
+                                </h:column>
+                                <h:column >  
+                                    <f:facet name="header"><b style="font-size: 40px;">Validade</b></f:facet> 
+                                    <h:outputText value="#{associado.exame.datavalidade}" styleClass="alinhamento" style="text-align: left !important;margin-right:40%;font-size: 40px;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"
+                                                                    timeZone="America/Sao_Paulo" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><b style="font-size: 40px;">Situação</b></f:facet> 
+                                    <h:outputText value="#{associado.exame.situacao}" styleClass="alinhamento" style="float: left;font-size: 40px;" />
+                                </h:column>
+                            </h:dataTable>
+                        </p:tab>
+                        <p:tab title="Dependentes" titleStyle="font-size:40px;">
+                            <h:dataTable  id="idAcessoPiscinaDependentes" class="table" styleClass="table" style="width: 95%;" value="#{acessoPiscinaMB.listaExameDependente}" var="dependente">
+                                <h:column>
+                                    <f:facet name="header"><b style="font-size: 40px;">Nome</b></f:facet> 
+                                    <h:outputText value="#{dependente.exame.nomeCliente}" styleClass="alinhamento" style="float: left;font-size: 40px;" />
+                                </h:column>
+                                <h:column >  
+                                    <f:facet name="header"><b style="font-size: 40px;">Matricula</b></f:facet> 
+                                    <h:outputText value="#{dependente.exame.matricula}" styleClass="alinhamento" style="float: left;font-size: 40px;" />
+                                </h:column>
+                                <h:column >  
+                                    <f:facet name="header"><b style="font-size: 40px;">Validade</b></f:facet> 
+                                    <h:outputText value="#{dependente.exame.datavalidade}" styleClass="alinhamento" style="text-align: left !important;margin-right:40%;font-size: 40px;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"
+                                                                    timeZone="America/Sao_Paulo" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><b style="font-size: 40px;">Situação</b></f:facet> 
+                                    <h:outputText value="#{dependente.exame.situacao}" styleClass="alinhamento" style="float: left;font-size: 40px;" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><b style="font-size: 40px;">Associado</b></f:facet> 
+                                    <h:outputText value="#{dependente.dependente.associado.cliente.nome}" styleClass="alinhamento" style="float: left;font-size: 40px;" />
+                                </h:column>
+                            </h:dataTable>
+                        </p:tab>
+                    </p:tabView>
+
+                </h:form>
+             </div>
+    </body>
+</html>
