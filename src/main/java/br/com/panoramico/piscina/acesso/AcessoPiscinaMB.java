@@ -260,13 +260,12 @@ public class AcessoPiscinaMB implements Serializable{
                 listaExameAssociado = new ArrayList<>();
             }else{
                 if (listaExameDependente == null || listaExameDependente.isEmpty()) {
-                    for (int i = 0; i < listaExameAssociado.size(); i++) {
                         listaExameDependente = new ArrayList<>();
-                        Examedependente examedependente = exameDependenteDao.find("Select ed From Examedependente ed Where ed.dependente.associado.idassociado=" + 
+                    for (int i = 0; i < listaExameAssociado.size(); i++) {
+                        List<Examedependente> listaExamedep = exameDependenteDao.list("Select ed From Examedependente ed Where ed.dependente.associado.idassociado=" + 
                                 listaExameAssociado.get(i).getAssociado().getIdassociado());
-                        if (examedependente == null || examedependente.getIdexamedependente() == null) {
-                            listaExameDependente.add(examedependente);
-                            examedependente = new Examedependente();
+                        for (int j = 0; j < listaExamedep.size(); j++) {
+                            listaExameDependente.add(listaExamedep.get(j));
                         }
                     }
                 }
